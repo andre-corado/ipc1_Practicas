@@ -1,13 +1,9 @@
 
 import java.awt.BorderLayout;
 import java.io.File;
-import java.util.concurrent.atomic.AtomicBoolean;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartPanel;
-import org.jfree.chart.JFreeChart;
-import org.jfree.data.category.DefaultCategoryDataset;
+
 
 
 
@@ -16,13 +12,16 @@ public class ventana extends javax.swing.JFrame {
     private boolean graficaGenerada;
     private ArchivoTraducido archivoTraducido;
     private String tiempoCronometro;
-    private Object[][] datos, datosIniciales;
+    private Object[][] datos;
     private String tituloGrafica, encabezado_x, encabezado_y;
 
 
     
     public ventana() {
         initComponents();
+        fieldCronometro.setText("00:00.000");
+        sort2.setText("Insertion Sort");
+        sort3.setText("Shell Sort");
     }
 
     
@@ -333,8 +332,7 @@ public class ventana extends javax.swing.JFrame {
                 panelGraficas.validate();
                 graficaGenerada = true;
                 datos = archivoTraducido.datos;
-                datosIniciales = archivoTraducido.datos;
-                
+
             } catch (Exception e){
                 JOptionPane.showMessageDialog(null, "Documento o ruta no válida. ", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
@@ -369,35 +367,21 @@ public class ventana extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (graficaGenerada) {
 
-            // Desactivamos para evitar errores
-            fieldTituloGrafica.setEnabled(false);
-            botonOrdenar.setEnabled(false);
-            botonGenerarGrafica.setEnabled(false);
-            botonExaminar.setEnabled(false);
-
             //guardar foto de gráfica inicial
 
             if (esAlgoritmoValido()) {
-
-
                 //Iniciamos cronómetro y algoritmo
 
                 Algoritmo ordenamiento = new Algoritmo(algoritmo(),orden(),datos, encabezado_x, encabezado_y, tituloGrafica, ascendente, descendente, bubblesort, sort2, sort3, panelGraficas, fieldPasos);
-                new Cronometro(fieldCronometro).start();
                 ordenamiento.start();
-
-                tiempoCronometro = fieldCronometro.getText();
+                new Cronometro(fieldCronometro).start();
 
             } else {
                 fieldCronometro.setText("00:00.000");
                 JOptionPane.showMessageDialog(null, "Debe de elegir el orden y el algoritmo para ordenar la gráfica", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
 
-            //Volvemos a activar
-            fieldTituloGrafica.setEnabled(true);
-            botonOrdenar.setEnabled(true);
-            botonGenerarGrafica.setEnabled(true);
-            botonExaminar.setEnabled(true);
+
         } else  {
             JOptionPane.showMessageDialog(null, "Para ordenar debe de primero generar una gráfica.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }

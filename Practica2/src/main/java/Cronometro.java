@@ -6,7 +6,8 @@ public class Cronometro extends Thread {
 
     private int minutos, segundos, milisegundos;
     private volatile javax.swing.JLabel lblCronometro;
-    public static AtomicBoolean running = new AtomicBoolean(true);
+    public static AtomicBoolean running = new AtomicBoolean(false);
+    public static String tiempo;
 
 
     public Cronometro (javax.swing.JLabel lblCronometro) {
@@ -50,6 +51,7 @@ public class Cronometro extends Thread {
                 }
 
                 lblCronometro.setText(tiempo);
+                this.tiempo = tiempo;
                 Thread.sleep(1);
 
                 milisegundos++;
