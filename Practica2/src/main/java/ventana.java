@@ -11,7 +11,6 @@ public class ventana extends javax.swing.JFrame {
 
     private boolean graficaGenerada;
     private ArchivoTraducido archivoTraducido;
-    private String tiempoCronometro;
     private Object[][] datos;
     private String tituloGrafica, encabezado_x, encabezado_y;
 
