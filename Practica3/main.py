@@ -159,7 +159,7 @@ def moverPacman():
             for fruta in frutas:
                 if fruta.fila == pacman.fila and fruta.columna == pacman.columna:
                     global ultFruta
-                    ultFruta = frutas.index(fruta) + 1
+                    ultFruta = fruta.punteo
                     global punteo
                     punteo += fruta.punteo
                     frutas[frutas.index(fruta)] = Fruta()
